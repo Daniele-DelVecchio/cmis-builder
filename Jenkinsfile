@@ -14,7 +14,7 @@ pipeline {
         stage("Clone code from GitHub") {
             steps {
                 script {
-                    git branch: 'Master', credentialsId: 'githubwithpassword', url: 'https://github.com/Daniele-DelVecchio/cmis-builder';
+                    git branch: 'Master', credentialsId: 'GIT_REPO', url: 'https://github.com/Daniele-DelVecchio/cmis-builder';
                 }
             }
         }
