@@ -24,8 +24,8 @@ jobs:
                                                    --sourceDir /s \
                                                    --workingDir /w \
                                                    --tokenAuth ${{ secrets.CAST_HIGHLIGHT_API_TOKEN }} \
-                                                   --companyId ${{ 1622 }} \
-                                                   --applicationId ${{ 1 }} \
-                                                   --serverUrl ${{ https://check.casthighlight.com }} \
+                                                   --companyId ${{ env.companyId }} \
+                                                   --applicationId ${{ env.applicationId }} \
+                                                   --serverUrl ${{ env.serverUrl }} \
                                                    --ignoreDirectories ${{ env.ignoreDirectories }}
 
