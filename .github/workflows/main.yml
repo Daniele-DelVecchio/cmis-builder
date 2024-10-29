@@ -1,0 +1,2 @@
+- name: CAST Highlight Scan
+uses: MichaelMULLER/highlight-scan-github-action@0.0.1
