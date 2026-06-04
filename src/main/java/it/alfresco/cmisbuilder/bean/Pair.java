@@ -10,12 +10,16 @@ import java.io.ObjectInputStream.GetField;
  * <h1>Pair.java</h1>
  *
  * <p>
+ * Classe generica e immutabile che modella una tupla (o coppia) di oggetti, 
+ * offrendo funzionalità di serializzazione e deserializzazione (readObject).
+ * Molto utile per raggruppare entità logicamente legate senza dover creare bean ad hoc.
  * </p>
  *
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.1
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-15 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public final class Pair<F, S> implements Serializable {
 

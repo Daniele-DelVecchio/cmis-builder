@@ -13,12 +13,16 @@ import it.alfresco.cmisbuilder.bean.Pair;
  * <h1>CMISQuery.java</h1>
  *
  * <p>
+ * Bean che contiene lo stato completo di una query CMIS in fase di costruzione, 
+ * racchiudendo le informazioni riguardanti le istruzioni SELECT, FROM, JOIN e WHERE, 
+ * ed infine l'effettiva stringa finale generata.
  * </p>
  *
- * @version 1.0.1
  * @since 1.0.0
+ * @version 1.0.2
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-21 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class CMISQuery {
 

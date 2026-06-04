@@ -10,12 +10,16 @@ import org.apache.commons.lang3.StringUtils;
  * <h1>JoinStatementBean.java</h1>
  *
  * <p>
+ * Bean che modella i parametri necessari per definire una clausola di JOIN.
+ * Mantiene la mappa della tabella su cui effettuare il join (comprensiva di alias) 
+ * e la colonna che viene utilizzata per l'incrocio dei dati.
  * </p>
  *
- * @version 1.0.0
- * @since 1.0.1
+ * @since 1.0.0
+ * @version 1.0.2
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-21 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class JoinStatementBean {
 

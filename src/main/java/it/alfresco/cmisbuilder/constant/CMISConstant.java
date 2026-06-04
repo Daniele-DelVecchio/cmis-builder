@@ -5,12 +5,15 @@ package it.alfresco.cmisbuilder.constant;
  * <h1>CMISConstant.java</h1>
  *
  * <p>
+ * Classe di utilità che racchiude tutte le costanti di base utilizzate all'interno 
+ * della libreria, come ad esempio il nome del campo identificativo standard di CMIS (cmis:objectId).
  * </p>
  *
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.1
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-15 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class CMISConstant {
 

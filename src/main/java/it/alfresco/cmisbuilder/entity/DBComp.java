@@ -11,12 +11,16 @@ import org.apache.commons.lang3.StringUtils;
  * <h1>DBComponent.java</h1>
  *
  * <p>
+ * Classe che rappresenta un componente base del database per la generazione 
+ * delle query CMIS. Memorizza le informazioni sull'entità, sul relativo alias 
+ * e fornisce dei predicati e funzioni interne per la loro formattazione e manipolazione.
  * </p>
  *
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.1
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-19 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class DBComp {
 

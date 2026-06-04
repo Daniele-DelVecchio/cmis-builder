@@ -5,12 +5,15 @@ package it.alfresco.cmisbuilder.enums;
  * <h1>CmisToken.java</h1>
  *
  * <p>
+ * Enumerazione dei token chiave riservati della sintassi CMIS (SELECT, FROM, JOIN, ON, WHERE).
+ * Vengono utilizzati internamente dal costruttore per formare la struttura base della query.
  * </p>
  *
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.1
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-15 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public enum CmisToken {
     

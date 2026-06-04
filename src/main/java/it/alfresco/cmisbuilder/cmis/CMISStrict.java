@@ -2,24 +2,28 @@ package it.alfresco.cmisbuilder.cmis;
 
 import org.apache.commons.lang3.StringUtils;
 
-import it.alfresco.cmisbuilder.entity.DBComp;
 import it.alfresco.cmisbuilder.entity.CMISCondition;
+import it.alfresco.cmisbuilder.entity.DBComp;
 
 /**
  * 
  * <h1>CMISStrict.java</h1>
  *
  * <p>
+ * Implementazione della classe CMIS che al momento non è supportata e 
+ * solleva un'eccezione (UnsupportedOperationException) in fase di costruzione 
+ * dei vari componenti della query.
  * </p>
  *
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.0
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-19 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class CMISStrict extends CMIS {
 
-	public String query = StringUtils.EMPTY;
+	private String query = StringUtils.EMPTY;
 
 	@Override
 	public String buildQuery() {
@@ -28,38 +32,37 @@ public class CMISStrict extends CMIS {
 
 	@Override
 	public CMIS SELECT(DBComp... selectStatement) {
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
 	public CMIS FROM(DBComp fromStatement) {
-		return null;
-
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
 	public CMIS JOIN(DBComp joinStatement, String columnToJoin) {
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
 	public CMIS JOIN_OBJECTID(DBComp joinStatement) {
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
 	public CMIS WHERE(CMISCondition whereCondition) {
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
 	public CMIS AND(CMISCondition andCondition) {
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 	@Override
 	public CMIS OR(CMISCondition orCondition) {
-		return null;
+		throw new UnsupportedOperationException("Not implemented yet");
 	}
 
 }

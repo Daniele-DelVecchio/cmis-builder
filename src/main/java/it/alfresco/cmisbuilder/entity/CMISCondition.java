@@ -12,12 +12,16 @@ import it.alfresco.cmisbuilder.enums.Operator;
  * <h1>QueryCondition.java</h1>
  *
  * <p>
+ * Classe che modella una condizione utilizzata nelle clausole (WHERE, AND, OR) 
+ * delle query CMIS. Contiene il campo, il valore da controllare, l'operatore, 
+ * ed eventualmente il nome della tabella, formattando poi correttamente la condizione finale.
  * </p>
  *
- * @version 1.0.0
  * @since 1.0.0
+ * @version 1.0.1
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-19 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class CMISCondition {
 

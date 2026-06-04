@@ -3,59 +3,54 @@ package it.alfresco.cmisbuilder.cmis;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
+
 import it.alfresco.cmisbuilder.bean.util.CMISUtil;
 import it.alfresco.cmisbuilder.constant.CMISConstant;
-import it.alfresco.cmisbuilder.entity.DBComp;
 import it.alfresco.cmisbuilder.entity.CMISCondition;
+import it.alfresco.cmisbuilder.entity.DBComp;
 import it.alfresco.cmisbuilder.enums.CmisToken;
 import it.alfresco.cmisbuilder.enums.Conditions;
 import it.alfresco.cmisbuilder.enums.Operator;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 
  * <h1>CMISAlfresco.java</h1>
  *
  * <p>
+ * Implementazione della classe astratta CMIS, specializzata nella costruzione di query 
+ * per Alfresco. Implementa tutti i metodi per formare i vari statement e assembla 
+ * la stringa finale.
  * </p>
  *
- * @version 1.0.1
  * @since 1.0.0
+ * @version 1.0.2
+ * 
  * @author Daniele Del Vecchio
- * @lastUpdate 2022-12-21 - Daniele Del Vecchio
+ * @lastUpdate 2026-06-03 - Daniele Del Vecchio
  */
 public class CMISAlfresco extends CMIS {
-    
-    public CMISQuery cmisQuery = new CMISQuery();
+
+    private CMISQuery cmisQuery = new CMISQuery();
+    private StringBuilder queryBuilder = new StringBuilder();
 
     @Override
     public String buildQuery() {
-        return StringUtils.isNotBlank(this.cmisQuery.getStringValue())
-                ? this.cmisQuery.getStringValue().trim()
-                : StringUtils.EMPTY;
+        this.cmisQuery.setStringValue(queryBuilder.toString().trim());
+        return this.cmisQuery.getStringValue();
     }
 
     @Override
     public CMIS SELECT(DBComp... selectFields) {
-        this.cmisQuery.setSelectStatement
-                ( Arrays.asList(selectFields)
-                        .stream()
-                        .collect(Collectors.toMap(DBComp::getEntity, DBComp::getAlias))
-                );
+        this.cmisQuery.setSelectStatement(Arrays.stream(selectFields)
+                .collect(Collectors.toMap(DBComp::getEntity, DBComp::getAlias)));
 
-        this.cmisQuery.setStringValue
-                ( CmisToken.SELECT
-                        + " "
-                        + Arrays.asList(selectFields)
-                        .stream()
-                        .map(field -> StringUtils.isBlank
-                                ( field.getEntityAsAlias())
+        this.queryBuilder.append(CmisToken.SELECT).append(" ")
+                .append(Arrays.stream(selectFields)
+                        .map(field -> StringUtils.isBlank(field.getEntityAsAlias())
                                 ? field.getEntity()
-                                : field.getEntityAsAlias()
-                        )
-                        .collect(Collectors.joining(", "))
-                );
+                                : field.getEntityAsAlias())
+                        .collect(Collectors.joining(", ")));
 
         return this;
     }
@@ -68,13 +63,9 @@ public class CMISAlfresco extends CMIS {
                 ? fromStatement.getEntity()
                 : fromStatement.getEntityAsAlias();
 
-        this.cmisQuery.setStringValue
-                ( this.cmisQuery.getStringValue()
-                        + " "
-                        + CmisToken.FROM
-                        + " "
-                        + entity
-                );
+        this.queryBuilder.append(" ")
+                .append(CmisToken.FROM).append(" ")
+                .append(entity);
 
         return this;
     }
@@ -87,23 +78,14 @@ public class CMISAlfresco extends CMIS {
         String entityAsAlias = CMISUtil.getEntityAsAlias(joinStatement);
         String fromStatement = CMISUtil.getSecondStatement(this.cmisQuery.getFromStatement());
 
-        this.cmisQuery.setStringValue
-                ( this.cmisQuery.getStringValue()
-                        + " "
-                        + CmisToken.JOIN
-                        + " "
-                        + entity
-                        + " "
-                        + CmisToken.ON
-                        + " "
-                        + entityAsAlias
-                        + "."
-                        + columnToJoin
-                        + Operator.EQUALS.operatorValue
-                        + fromStatement
-                        + "."
-                        + columnToJoin
-                );
+        this.queryBuilder.append(" ")
+                .append(CmisToken.JOIN).append(" ")
+                .append(entity).append(" ")
+                .append(CmisToken.ON).append(" ")
+                .append(entityAsAlias).append(".")
+                .append(columnToJoin).append(Operator.EQUALS.operatorValue)
+                .append(fromStatement).append(".")
+                .append(columnToJoin);
 
         return this;
     }
@@ -116,23 +98,14 @@ public class CMISAlfresco extends CMIS {
         String entityAsAlias = CMISUtil.getEntityAsAlias(joinStatement);
         String fromStatement = CMISUtil.getSecondStatement(this.cmisQuery.getFromStatement());
 
-        this.cmisQuery.setStringValue
-                ( this.cmisQuery.getStringValue()
-                	+ " "
-                        + CmisToken.JOIN
-                        + " "
-                        + entityAsAlias
-                        + " "
-                        + CmisToken.ON
-                        + " "
-                        + fromStatement
-                        + "."
-                        + CMISConstant.CMIS_OBJECT_ID
-                        + Operator.EQUALS.operatorValue
-                        + entity
-                        + "."
-                        + CMISConstant.CMIS_OBJECT_ID
-                );
+        this.queryBuilder.append(" ")
+                .append(CmisToken.JOIN).append(" ")
+                .append(entityAsAlias).append(" ")
+                .append(CmisToken.ON).append(" ")
+                .append(fromStatement).append(".")
+                .append(CMISConstant.CMIS_OBJECT_ID).append(Operator.EQUALS.operatorValue)
+                .append(entity).append(".")
+                .append(CMISConstant.CMIS_OBJECT_ID);
 
         return this;
     }
@@ -141,41 +114,29 @@ public class CMISAlfresco extends CMIS {
     public CMIS WHERE(CMISCondition condition) {
         this.cmisQuery.setWhereStatement(condition.getStringValue());
 
-        this.cmisQuery.setStringValue
-                ( this.cmisQuery.getStringValue()
-                        + " "
-                        + CmisToken.WHERE
-                        + " "
-                        + this.cmisQuery.getWhereStatement()
-                );
+        this.queryBuilder.append(" ")
+                .append(CmisToken.WHERE).append(" ")
+                .append(this.cmisQuery.getWhereStatement());
 
         return this;
     }
 
     @Override
     public CMIS AND(CMISCondition andCondition) {
-        this.cmisQuery.setStringValue
-                ( this.cmisQuery.getStringValue()
-                        + " "
-                        + Conditions.AND
-                        + " "
-                        + andCondition.getStringValue()
-                );
+        this.queryBuilder.append(" ")
+                .append(Conditions.AND).append(" ")
+                .append(andCondition.getStringValue());
 
         return this;
     }
 
     @Override
     public CMIS OR(CMISCondition orCondition) {
-        this.cmisQuery.setStringValue
-                ( this.cmisQuery.getStringValue()
-                        + " "
-                        + Conditions.OR
-                        + " "
-                        + orCondition.getStringValue()
-                );
+        this.queryBuilder.append(" ")
+                .append(Conditions.OR).append(" ")
+                .append(orCondition.getStringValue());
 
         return this;
     }
-    
+
 }
